@@ -9,7 +9,7 @@ CONFIG = {
     "TAX_RATE": 0.05,
     "DEFAULT_HOURS": 3,
     "APP_TITLE": "專業攝影報價單生成系統",
-    "APP_VERSION": "2.0.0",
+    "APP_VERSION": "2.1.0",
 }
 
 # 報價細節資料結構
@@ -17,7 +17,7 @@ class ProjectData:
     # 台北攝影師報價行情及項目規格
     PROJECT_DETAILS = {
         "平面拍攝-活動": {
-            "hourly_rate": 3000,
+            "hourly_rate": 3500,  # 更新為3500/hr
             "video_options": False,
             "min_hours": 2,
             "category": "平面拍攝",
@@ -91,10 +91,15 @@ class ProjectData:
                 "type": "dropdown",
                 "options": [
                     {"label": "不需要", "value": 0},
-                    {"label": "一位攝助 $2,000", "value": 2000},
-                    {"label": "兩位攝助 $4,000", "value": 4000}
+                    {"label": "$2,000", "value": 2000},
+                    {"label": "$2,500", "value": 2500},
+                    {"label": "$3,000", "value": 3000},
+                    {"label": "$4,000", "value": 4000},
+                    {"label": "$5,000", "value": 5000},
+                    {"label": "$6,000", "value": 6000},
+                    {"label": "$8,000", "value": 8000}
                 ],
-                "spec": "協助拍攝、器材搬運、協調現場等",
+                "spec": "協助拍攝、器材搬運、協調現場",
                 "icon": "👤"
             },
             "燈光師": {
@@ -107,17 +112,21 @@ class ProjectData:
                     {"label": "燈光師 $12,000", "value": 12000},
                     {"label": "燈光師 $15,000", "value": 15000}
                 ],
-                "spec": "專業燈光師，負責燈光設計與佈置",
+                "spec": "燈光設計與佈置",
                 "icon": "🔦"
             },
             "燈光助理": {
                 "type": "dropdown",
                 "options": [
                     {"label": "不需要", "value": 0},
-                    {"label": "一位燈光助理 $2,000", "value": 2000},
-                    {"label": "兩位燈光助理 $4,000", "value": 4000}
+                    {"label": "$2,000", "value": 2000},
+                    {"label": "$2,500", "value": 2500},
+                    {"label": "$3,000", "value": 3000},
+                    {"label": "$4,000", "value": 4000},
+                    {"label": "$5,000", "value": 5000},
+                    {"label": "$6,000", "value": 6000}
                 ],
-                "spec": "協助燈光設置、調整燈位、控制光比等",
+                "spec": "協助燈光設置與調整",
                 "icon": "💡"
             },
             "燈光設備": {
@@ -138,21 +147,16 @@ class ProjectData:
                 "spec": "燈光設備與人員綜合費用",
                 "icon": "💡"
             },
-            "美術人員": {
+            "美術": {  # 改名為美術
                 "type": "fixed",
-                "description": "美術指導費用",
+                "description": "美術人員費用",
                 "unit": "位",
-                "icon": "👨‍🎨"
-            },
-            "美術助理": {
-                "type": "fixed",
-                "description": "美術助理費用",
-                "unit": "位",
-                "icon": "👩‍🎨"
+                "icon": "👨‍🎨",
+                "spec": "協助場景陳設與美術規劃"
             }
         },
         
-        # 美術相關項目
+        # 美術道具相關項目
         "美術道具": {
             "美術道具費": {
                 "type": "fixed",
@@ -161,14 +165,14 @@ class ProjectData:
                 "icon": "🎨",
                 "actual_expense": True
             },
-            "道具採買": {
+            "道具採買": {  # 簡化道具採買選項
                 "type": "dropdown",
                 "options": [
                     {"label": "不需要", "value": 0},
-                    {"label": "基本道具 $1,000", "value": 1000},
-                    {"label": "標準道具 $2,000", "value": 2000},
-                    {"label": "進階道具 $3,000", "value": 3000},
-                    {"label": "專業道具 $4,000", "value": 4000}
+                    {"label": "$1,000", "value": 1000},
+                    {"label": "$2,000", "value": 2000},
+                    {"label": "$3,000", "value": 3000},
+                    {"label": "$4,000", "value": 4000}
                 ],
                 "spec": "道具採買費用",
                 "unit": "式",
@@ -184,6 +188,12 @@ class ProjectData:
         
         # 後製相關項目
         "後製相關": {
+            "提供小檔毛片": {  # 新增選項
+                "type": "checkbox",
+                "description": "提供小檔毛片(2MB/JPG)",
+                "spec": "提供2MB JPG格式的原始拍攝檔案",
+                "icon": "📸"
+            },
             "網路用精修": {
                 "type": "with_quantity",
                 "price": 1000,
@@ -200,12 +210,20 @@ class ProjectData:
                 "unit": "張",
                 "icon": "✨"
             },
-            "調光調色": {
+            "去背": {  # 新增去背選項
+                "type": "with_quantity",
+                "price": 300,
+                "description": "去背 $300/張",
+                "spec": "產品或人物去背服務",
+                "unit": "張",
+                "icon": "✂️"
+            },
+            "調光調色": {  # 修改調光調色選項
                 "type": "dropdown",
                 "options": [
                     {"label": "不需要", "value": 0},
-                    {"label": "基本調光調色 $3,000", "value": 3000},
-                    {"label": "進階調光調色 $6,000", "value": 6000}
+                    {"label": "$3,500", "value": 3500},
+                    {"label": "$7,000", "value": 7000}
                 ],
                 "spec": "全照片調光調色，提供6MB JPG檔",
                 "unit": "式",
@@ -217,6 +235,12 @@ class ProjectData:
                 "unit": "式",
                 "icon": "⚡",
                 "with_quantity": True
+            },
+            "急件處理": {  # 新增急件處理選項
+                "type": "fixed",
+                "description": "急件處理費用",
+                "unit": "式",
+                "icon": "⏱️"
             }
         },
         
@@ -242,7 +266,6 @@ class ProjectData:
             "車馬費": {
                 "type": "dropdown",
                 "options": [
-                    {"label": "不需要", "value": 0},
                     {"label": "$500", "value": 500},
                     {"label": "$1,000", "value": 1000},
                     {"label": "$1,500", "value": 1500},
@@ -283,14 +306,59 @@ class ProjectData:
 8. 本案之報價單回傳簽署後視為正式合約並支付50%訂金，交付製作檔案後30日需付清尾款。
 9. 本報價單費用為專案優惠價，不可作為往後專案報價依據。"""
 
+    # 公司資訊
+    COMPANIES = {
+        "魚游製作工作室": {
+            "name": "魚游製作工作室",
+            "default": True
+        },
+        "好歐映像工作室": {
+            "name": "好歐映像工作室",
+            "default": False
+        }
+    }
+
 # HTML報價單處理模組
 class QuoteGenerator:
     @staticmethod
-    def generate_html_quote(client_name, project_name, project_type, shoot_date, shoot_hours, add_on_items, video_options=None):
+    def generate_html_quote(client_name, project_name, project_type, shoot_date, shoot_hours, add_on_items, 
+                          company_info=None, video_options=None):
         """生成HTML格式的報價單，支援完整的中文顯示與更專業的排版"""
         # 獲取當前專案詳情
         project_data = ProjectData.PROJECT_DETAILS[project_type]
         is_per_photo = project_data.get("per_photo", False)
+        
+        # 檢查是否提供小檔毛片
+        provide_raw_files = False
+        for item in add_on_items:
+            if item['name'] == "提供小檔毛片":
+                provide_raw_files = True
+                break
+        
+        # 設定攝影師規格說明
+        if project_type.startswith("平面拍攝"):
+            if "商品拍攝(張計費)" in project_type:
+                photographer_spec = "(1) 以張計費\n(2) 基本拍攝2張起\n(3) 適合電商產品主圖、廣告用商品照"
+                if provide_raw_files:
+                    photographer_spec += "\n(4) 提供小檔毛片(2MB/JPG)"
+            elif "商品拍攝(時計費)" in project_type:
+                photographer_spec = "(1) 以時計費\n(2) 基本出班為3小時\n(3) 適合多角度商品拍攝、社群內容使用"
+                if provide_raw_files:
+                    photographer_spec += "\n(4) 提供小檔毛片(2MB/JPG)"
+            elif project_type == "平面拍攝-活動":
+                photographer_spec = "(1) 以時計費\n(2) 基本出班為2小時\n(3) 提供活動照片"
+                if provide_raw_files:
+                    photographer_spec += "\n(4) 提供小檔毛片(2MB/JPG)"
+            elif project_type == "平面拍攝-品牌形象":
+                photographer_spec = "(1) 以時計費\n(2) 基本出班為4小時\n(3) 適合企業形象照、產品情境照"
+                if provide_raw_files:
+                    photographer_spec += "\n(4) 提供小檔毛片(2MB/JPG)"
+            else:
+                photographer_spec = "(1) 以時計費\n(2) 基本出班為2小時\n(3) 時間含30分鐘架設時間"
+                if provide_raw_files:
+                    photographer_spec += "\n(4) 提供小檔毛片(2MB/JPG)"
+        else:
+            photographer_spec = "(1) 以時計費\n(2) 基本出班為4小時\n(3) 時間含1小時前置架設\n(4) 包含基本剪輯及調色\n(5) 提供兩次修改機會"
         
         # 設置中文字體樣式與更現代的排版
         styles = """
@@ -312,6 +380,16 @@ class QuoteGenerator:
                 box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
                 background-color: #fff;
                 border-radius: 6px;
+            }
+            .header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 20px;
+            }
+            .logo {
+                max-width: 150px;
+                max-height: 80px;
             }
             h1 {
                 text-align: center;
@@ -433,7 +511,14 @@ class QuoteGenerator:
         # 計算總金額
         hourly_rate = project_data["hourly_rate"]
         base_amount = hourly_rate * shoot_hours
-        additional_amount = sum(item['amount'] for item in add_on_items)
+        
+        # 過濾掉小檔毛片項目(已顯示在攝影師規格中)
+        filtered_items = []
+        for item in add_on_items:
+            if item['name'] != "提供小檔毛片":
+                filtered_items.append(item)
+        
+        additional_amount = sum(item['amount'] for item in filtered_items)
         subtotal = base_amount + additional_amount
         tax = subtotal * CONFIG["TAX_RATE"]
         total = subtotal + tax
@@ -447,8 +532,7 @@ class QuoteGenerator:
             "燈光助理",
             "燈光",
             "燈光設備",
-            "美術人員",
-            "美術助理",
+            "美術",  # 改名為美術
             "美術道具費",
             "道具採買",
             "企劃費",
@@ -459,35 +543,43 @@ class QuoteGenerator:
         # 對項目進行排序
         sorted_items = []
         for name in order_items:
-            for item in add_on_items:
+            for item in filtered_items:
                 if item['name'] == name:
                     sorted_items.append(item)
         
         # 添加其他未在預設順序中的項目
-        for item in add_on_items:
+        for item in filtered_items:
             if item['name'] not in order_items:
                 sorted_items.append(item)
         
-        # 設定攝影師規格說明
+        # 生成報價單號 - 依照客戶名稱、專案類型和日期生成更有組織性的編號
+        category_code = ""
         if project_type.startswith("平面拍攝"):
-            if "商品拍攝(張計費)" in project_type:
-                photographer_spec = "(1) 以張計費\n(2) 基本拍攝2張起\n(3) 適合電商產品主圖、廣告用商品照\n(4) 拍攝毛片小檔可提供"
-            elif "商品拍攝(時計費)" in project_type:
-                photographer_spec = "(1) 以時計費\n(2) 基本出班為3小時\n(3) 適合多角度商品拍攝、社群內容使用\n(4) 拍攝毛片小檔可提供"
-            elif project_type == "平面拍攝-活動":
-                photographer_spec = "(1) 以時計費\n(2) 基本出班為2小時\n(3) 提供活動照片，拍攝毛片小檔"
-            elif project_type == "平面拍攝-品牌形象":
-                photographer_spec = "(1) 以時計費\n(2) 基本出班為4小時\n(3) 適合企業形象照、產品情境照\n(4) 拍攝毛片小檔可提供"
-            else:
-                photographer_spec = "(1) 以時計費\n(2) 基本出班為2小時\n(3) 時間含30分鐘架設時間\n(4) 拍攝毛片小檔可提供"
+            category_code = "P"
+        elif project_type.startswith("影像拍攝"):
+            category_code = "V"
         else:
-            photographer_spec = "(1) 以時計費\n(2) 基本出班為4小時\n(3) 時間含1小時前置架設\n(4) 包含基本剪輯及調色\n(5) 提供兩次修改機會"
+            category_code = "O"
+            
+        # 客戶名稱縮寫（取前兩個字）
+        client_code = ""
+        if client_name:
+            client_code = client_name[:2]
         
-        # 生成報價單號
-        quote_number = f"Q{datetime.datetime.now().strftime('%Y%m%d%H%M')}"
+        # 日期編碼
+        date_code = datetime.datetime.now().strftime('%Y%m%d')
         
-        # 建立HTML內容
-        html = f"""
+        # 序號（時分）
+        sequence = datetime.datetime.now().strftime('%H%M')
+        
+        # 組合報價單號
+        quote_number = f"Q{category_code}{client_code}{date_code}-{sequence}"
+        
+        # 處理公司資訊
+        company_name = company_info.get("name", "專業攝影服務") if company_info else "專業攝影服務"
+        
+        # 建立HTML內容 - 注意：使用單引號代替雙引號，並將全形冒號改為半形冒號
+        html = f'''
         <!DOCTYPE html>
         <html lang="zh-TW">
         <head>
@@ -498,24 +590,25 @@ class QuoteGenerator:
         </head>
         <body>
             <div class="container">
-                <h1>{project_name or "專業攝影服務"}拍攝報價單</h1>
+                <h1>{project_name or company_name}拍攝報價單</h1>
                 
                 <div class="header-info">
                     <div class="header-block">
-                        <p><strong>客戶名稱：</strong>{client_name}</p>
-                        <p><strong>專案類型：</strong>{project_type}</p>
-                        <p><strong>拍攝日期：</strong>{shoot_date.strftime('%Y-%m-%d') if shoot_date else '待定'}</p>
+                        <p><strong>客戶名稱:</strong>{client_name}</p>
+                        <p><strong>製作方:</strong>{company_name}</p>
+                        <p><strong>專案類型:</strong>{project_type}</p>
+                        <p><strong>拍攝日期:</strong>{shoot_date.strftime('%Y-%m-%d') if shoot_date else '待定'}</p>
                     </div>
                     <div class="header-block right-align">
-                        <p><strong>日期：</strong>{datetime.datetime.now().strftime('%Y-%m-%d')}</p>
-                        <p><strong>報價單號：</strong><span class="quote-id">{quote_number}</span></p>
-                        <p><strong>有效期限：</strong>{(datetime.datetime.now() + datetime.timedelta(days=28)).strftime('%Y-%m-%d')}</p>
+                        <p><strong>日期:</strong>{datetime.datetime.now().strftime('%Y-%m-%d')}</p>
+                        <p><strong>報價單號:</strong><span class="quote-id">{quote_number}</span></p>
+                        <p><strong>有效期限:</strong>{(datetime.datetime.now() + datetime.timedelta(days=28)).strftime('%Y-%m-%d')}</p>
                     </div>
                 </div>
-        """
+        '''
         
         # 表格開始
-        html += f"""
+        html += f'''
                 <table>
                     <thead>
                         <tr>
@@ -535,7 +628,7 @@ class QuoteGenerator:
                             <td class="amount">${hourly_rate:,}/{("張" if is_per_photo else "小時")}</td>
                             <td class="amount">${base_amount:,}</td>
                         </tr>
-        """
+        '''
         
         # 添加所有項目（已排序）
         for item in sorted_items:
@@ -552,7 +645,7 @@ class QuoteGenerator:
             if " (實報實銷)" in spec_text:
                 spec_text = spec_text.replace(" (實報實銷)", "")
             
-            html += f"""
+            html += f'''
                 <tr>
                     <td>{item['name']}</td>
                     <td class="spec-text">{spec_text}</td>
@@ -560,30 +653,27 @@ class QuoteGenerator:
                     <td class="amount">{price_display}</td>
                     <td class="amount">{amount_display}</td>
                 </tr>
-            """
+            '''
         
-        # 總計部分
-        html += f"""
-                        <tr class="total-row">
-                            <td colspan="4" class="amount">小計</td>
-                            <td class="amount">${subtotal:,}</td>
-                        </tr>
-                        <tr>
-                            <td colspan="4" class="amount">稅金 ({int(CONFIG["TAX_RATE"]*100)}%)</td>
-                            <td class="amount">${tax:,}</td>
-                        </tr>
-                        <tr class="total-row">
-                            <td colspan="4" class="amount">總計 (含稅)</td>
-                            <td class="amount">${total:,}</td>
-                        </tr>
-                    </tbody>
-                </table>
-        """
+        # 總計部分 - 單行字符串拼接
+        html += '<tr class="total-row"><td colspan="4" class="amount">小計</td>'
+        html += f'<td class="amount">${subtotal:,}</td></tr>'
+
+        html += '<tr><td colspan="4" class="amount">稅金 ('
+        html += f'{int(CONFIG["TAX_RATE"]*100)}%)</td>'
+        html += f'<td class="amount">${tax:,}</td></tr>'
+        
+        # 最終總計行
+        html += '<tr class="total-row"><td colspan="4" class="amount">總計 (含稅)</td>'
+        html += f'<td class="amount">${total:,}</td></tr>'
         
         # 備註說明
-        html += f"""
+        html += f'''
+                </tbody>
+                </table>
+                
                 <div class="remarks">
-                    <h3>說明事項：</h3>
+                    <h3>說明事項:</h3>
                     <ol>
                         <li>拍攝前三週需提供詳細拍攝內容企劃，如拍攝規格變動請立刻告知，並依新需求供新報價單。</li>
                         <li>拍攝需求如需購買一次性拍攝道具、美術陳設、協助購買道具、車馬費，費用另計。</li>
@@ -598,12 +688,12 @@ class QuoteGenerator:
                 </div>
                 
                 <div class="signature">
-                    <p>客戶簽章：_______________________</p>
-                    <p>日期：_______________________</p>
+                    <p>客戶簽章:_______________________</p>
+                    <p>日期:_______________________</p>
                 </div>
                 
                 <div class="quote-footer">
-                    本報價單由專業攝影報價單生成系統製作
+                    本報價單由{company_name}製作
                 </div>
                 
                 <div class="no-print" style="margin-top: 40px; text-align: center;">
@@ -613,7 +703,7 @@ class QuoteGenerator:
             </div>
         </body>
         </html>
-        """
+        '''
         
         return html
 
@@ -648,6 +738,10 @@ def display_summary(client_name, project_type, shoot_date, shoot_hours, add_on_i
     # 加購項目
     additional_amount = 0
     for item in add_on_items:
+        # 檢查是否為提供小檔毛片（在攝影師規格中顯示，不單獨計費）
+        if item['name'] == "提供小檔毛片":
+            continue
+            
         # 檢查是否為實報實銷項目
         if item.get('actual_expense', False):
             description = f"{item.get('unit', '')} (實報實銷)"
@@ -722,6 +816,21 @@ def create_add_on_sections(project_type, project_name):
     needs_planning = current_project.get("planning_options", False)
     discount_rate = 1.0  # 初始化折扣率
     
+    # 自定義按鈕顏色風格
+    button_style = """
+    <style>
+    .stTabs [data-baseweb="tab"] {
+        background-color: #2c3e50;
+        color: white;
+    }
+    .stTabs [aria-selected="true"] {
+        background-color: #1a2c3d !important;
+        border-top: 2px solid #3498db;
+    }
+    </style>
+    """
+    st.markdown(button_style, unsafe_allow_html=True)
+    
     # 使用標籤頁顯示不同類型的加購項目
     tabs = st.tabs([
         "📷 拍攝配置", 
@@ -740,7 +849,7 @@ def create_add_on_sections(project_type, project_name):
             col1, col2 = st.columns(2)
             
             with col1:
-                # 平面攝助選項
+                # 平面攝助選項 - 修改為單價×人數的計算方式
                 if is_photography_project:
                     item_name = "平面攝助"
                     item_config = ProjectData.ADD_ONS["拍攝相關"][item_name]
@@ -748,29 +857,38 @@ def create_add_on_sections(project_type, project_name):
                     
                     st.markdown(f"##### {icon} {item_name}")
                     
-                    options = item_config["options"]
-                    option_labels = [option["label"] for option in options]
+                    # 是否需要攝助
+                    need_assistant = st.checkbox("需要攝助", key="need_assistant_checkbox")
                     
-                    selected_index = st.selectbox(
-                        f"選擇{item_name}",
-                        range(len(option_labels)),
-                        format_func=lambda i: option_labels[i],
-                        key=f"addon_{item_name}"
-                    )
-                    
-                    selected_option = options[selected_index]
-                    selected_value = selected_option["value"]
-                    
-                    if selected_value > 0:
-                        quantity = 1 if "一位" in selected_option["label"] else 2
-                        add_on_items.append({
-                            'name': item_name,
-                            'spec': item_config["spec"],
-                            'quantity': quantity,
-                            'unit': "位",
-                            'price': selected_value / quantity,
-                            'amount': selected_value
-                        })
+                    if need_assistant:
+                        # 每位單價
+                        assistant_price = st.number_input(
+                            "每位攝助費用", 
+                            min_value=0, 
+                            step=500, 
+                            value=2000, 
+                            key="assistant_price", 
+                            format="%d"
+                        )
+                        
+                        assistant_count = st.number_input(
+                            "攝助人數", 
+                            min_value=1, 
+                            max_value=4,
+                            value=1, 
+                            key="assistant_count", 
+                            format="%d"
+                        )
+                        
+                        if assistant_price > 0 and assistant_count > 0:
+                            add_on_items.append({
+                                'name': item_name,
+                                'spec': item_config["spec"],
+                                'quantity': assistant_count,
+                                'unit': "位",
+                                'price': assistant_price,
+                                'amount': assistant_price * assistant_count
+                            })
                 
                 # 燈光處理 - 針對活動或商品拍攝
                 if is_event_photography or is_product_shoot:
@@ -834,45 +952,46 @@ def create_add_on_sections(project_type, project_name):
                             'amount': selected_value
                         })
                 
-                # 美術人員選項 - 不適用於活動拍攝
+                # 美術人員選項 - 不適用於活動拍攝 - 已優化為總費用+人數方式
                 if not is_event_photography:
-                    item_name = "美術人員"
-                    item_config = ProjectData.ADD_ONS["拍攝相關"][item_name]
+                    item_name = "美術"  # 改名為美術
+                    item_config = ProjectData.ADD_ONS["拍攝相關"]["美術"] # 使用項目中的"美術"
                     icon = item_config.get("icon", "")
                     
                     st.markdown(f"##### {icon} {item_name}")
                     
-                    art_personnel_spec = st.text_input(
-                        "美術指導規格說明", 
-                        key="art_personnel_spec",
-                        help="詳細描述美術指導職責與要求"
-                    )
-                    art_personnel_price = st.number_input(
-                        "美術指導費用", 
-                        min_value=0, 
-                        step=1000, 
-                        value=0, 
-                        key="art_personnel_price", 
-                        format="%d"
-                    )
-                    art_personnel_count = st.number_input(
-                        "美術指導人數", 
-                        min_value=0, 
-                        max_value=5,
-                        value=0, 
-                        key="art_personnel_count", 
-                        format="%d"
-                    )
+                    # 是否需要美術
+                    need_art_personnel = st.checkbox("需要美術", key="need_art_personnel_checkbox")
                     
-                    if art_personnel_spec and art_personnel_price > 0 and art_personnel_count > 0:
-                        add_on_items.append({
-                            'name': item_name,
-                            'spec': art_personnel_spec,
-                            'quantity': art_personnel_count,
-                            'unit': "位",
-                            'price': art_personnel_price,
-                            'amount': art_personnel_price * art_personnel_count
-                        })
+                    if need_art_personnel:
+                        # 美術人員總費用
+                        art_total_fee = st.number_input(
+                            "美術人員總費用", 
+                            min_value=0, 
+                            step=1000, 
+                            value=5000, 
+                            key="art_total_fee", 
+                            format="%d"
+                        )
+                        
+                        art_personnel_count = st.number_input(
+                            "美術人數", 
+                            min_value=1, 
+                            max_value=5,
+                            value=1, 
+                            key="art_personnel_count", 
+                            format="%d"
+                        )
+                        
+                        if art_total_fee > 0:
+                            add_on_items.append({
+                                'name': item_name,
+                                'spec': f"{item_config['spec']} ({art_personnel_count}位美術人員)",
+                                'quantity': 1,
+                                'unit': "式",
+                                'price': art_total_fee,
+                                'amount': art_total_fee
+                            })
             
             with col2:
                 # 燈光助理選項 - 不適用於活動拍攝或商品拍攝
@@ -883,29 +1002,38 @@ def create_add_on_sections(project_type, project_name):
                     
                     st.markdown(f"##### {icon} {item_name}")
                     
-                    options = item_config["options"]
-                    option_labels = [option["label"] for option in options]
+                    # 是否需要燈光助理
+                    need_light_assistant = st.checkbox("需要燈光助理", key="need_light_assistant_checkbox")
                     
-                    selected_index = st.selectbox(
-                        f"選擇{item_name}",
-                        range(len(option_labels)),
-                        format_func=lambda i: option_labels[i],
-                        key=f"addon_{item_name}"
-                    )
-                    
-                    selected_option = options[selected_index]
-                    selected_value = selected_option["value"]
-                    
-                    if selected_value > 0:
-                        quantity = 1 if "一位" in selected_option["label"] else 2
-                        add_on_items.append({
-                            'name': item_name,
-                            'spec': item_config["spec"],
-                            'quantity': quantity,
-                            'unit': "位",
-                            'price': selected_value / quantity,
-                            'amount': selected_value
-                        })
+                    if need_light_assistant:
+                        # 每位單價
+                        light_assistant_price = st.number_input(
+                            "每位燈光助理費用", 
+                            min_value=0, 
+                            step=500, 
+                            value=2000, 
+                            key="light_assistant_price", 
+                            format="%d"
+                        )
+                        
+                        light_assistant_count = st.number_input(
+                            "燈光助理人數", 
+                            min_value=1, 
+                            max_value=4,
+                            value=1, 
+                            key="light_assistant_count", 
+                            format="%d"
+                        )
+                        
+                        if light_assistant_price > 0 and light_assistant_count > 0:
+                            add_on_items.append({
+                                'name': item_name,
+                                'spec': item_config["spec"],
+                                'quantity': light_assistant_count,
+                                'unit': "位",
+                                'price': light_assistant_price,
+                                'amount': light_assistant_price * light_assistant_count
+                            })
                 
                 # 燈光設備選項 - 不適用於活動或商品拍攝
                 if not is_event_photography and not is_product_shoot:
@@ -937,46 +1065,6 @@ def create_add_on_sections(project_type, project_name):
                             'unit': "式",
                             'price': light_equipment_price,
                             'amount': light_equipment_price
-                        })
-                
-                # 美術助理選項 - 不適用於活動拍攝
-                if not is_event_photography:
-                    item_name = "美術助理"
-                    item_config = ProjectData.ADD_ONS["拍攝相關"][item_name]
-                    icon = item_config.get("icon", "")
-                    
-                    st.markdown(f"##### {icon} {item_name}")
-                    
-                    art_assistant_spec = st.text_input(
-                        "美術助理規格說明", 
-                        key="art_assistant_spec",
-                        help="詳細描述美術助理職責與要求"
-                    )
-                    art_assistant_price = st.number_input(
-                        "美術助理費用", 
-                        min_value=0, 
-                        step=1000, 
-                        value=0, 
-                        key="art_assistant_price", 
-                        format="%d"
-                    )
-                    art_assistant_count = st.number_input(
-                        "美術助理人數", 
-                        min_value=0, 
-                        max_value=5,
-                        value=0, 
-                        key="art_assistant_count", 
-                        format="%d"
-                    )
-                    
-                    if art_assistant_spec and art_assistant_price > 0 and art_assistant_count > 0:
-                        add_on_items.append({
-                            'name': item_name,
-                            'spec': art_assistant_spec,
-                            'quantity': art_assistant_count,
-                            'unit': "位",
-                            'price': art_assistant_price,
-                            'amount': art_assistant_price * art_assistant_count
                         })
         
         # Tab 2: 美術道具
@@ -1059,7 +1147,7 @@ def create_add_on_sections(project_type, project_name):
                             })
                 
                 with col2:
-                    # 道具採買選項
+                    # 道具採買選項 - 簡化顯示
                     item_name = "道具採買"
                     item_config = ProjectData.ADD_ONS["美術道具"][item_name]
                     icon = item_config.get("icon", "")
@@ -1095,6 +1183,29 @@ def create_add_on_sections(project_type, project_name):
         with tabs[2]:
             st.subheader("後製項目選擇")
             
+            # 先處理小檔毛片選項 - 平面拍攝適用
+            if is_photography_project:
+                item_name = "提供小檔毛片"
+                item_config = ProjectData.ADD_ONS["後製相關"][item_name]
+                icon = item_config.get("icon", "")
+                
+                st.markdown(f"##### {icon} {item_name}")
+                include_raw_files = st.checkbox(
+                    "提供小檔毛片(2MB/JPG)",
+                    key="addon_raw_files",
+                    help="提供小檔毛片可用於快速瀏覽或社群媒體參考"
+                )
+                
+                if include_raw_files:
+                    add_on_items.append({
+                        'name': item_name,
+                        'spec': item_config["spec"],
+                        'quantity': 1,
+                        'unit': "項",
+                        'price': 0,
+                        'amount': 0
+                    })
+            
             col1, col2 = st.columns(2)
             
             with col1:
@@ -1127,8 +1238,7 @@ def create_add_on_sections(project_type, project_name):
                             'price': item_config["price"],
                             'amount': item_config["price"] * quantity
                         })
-            
-            with col2:
+                
                 # 大圖精修選項
                 if is_photography_project:
                     item_name = "大圖精修"
@@ -1158,99 +1268,189 @@ def create_add_on_sections(project_type, project_name):
                             'price': item_config["price"],
                             'amount': item_config["price"] * quantity
                         })
-            
-            # 調光調色選項
-            item_name = "調光調色"
-            item_config = ProjectData.ADD_ONS["後製相關"][item_name]
-            icon = item_config.get("icon", "")
-            
-            st.markdown(f"##### {icon} {item_name}")
-            
-            if is_event_photography:
-                # 活動拍攝使用下拉選單
-                options = item_config["options"]
-                option_labels = [option["label"] for option in options]
                 
-                selected_index = st.selectbox(
-                    f"選擇{item_name}方案",
-                    range(len(option_labels)),
-                    format_func=lambda i: option_labels[i],
-                    key=f"addon_{item_name}"
-                )
-                
-                selected_option = options[selected_index]
-                selected_value = selected_option["value"]
-                
-                if selected_value > 0:
-                    add_on_items.append({
-                        'name': item_name,
-                        'spec': item_config["spec"],
-                        'quantity': 1,
-                        'unit': item_config.get("unit", "式"),
-                        'price': selected_value,
-                        'amount': selected_value
-                    })
-            else:
-                # 其他專案使用固定價格
-                include_color_adjustment = st.checkbox(
-                    f"調光調色 $6,000",
-                    key="addon_color_adjustment",
-                    help="為所有照片進行專業的調光調色處理"
-                )
-                
-                if include_color_adjustment:
-                    add_on_items.append({
-                        'name': item_name,
-                        'spec': item_config["spec"],
-                        'quantity': 1,
-                        'unit': "式",
-                        'price': 6000,
-                        'amount': 6000
-                    })
+                # 優化去背選項 - 不適用於活動拍攝
+                if is_photography_project and not is_event_photography:
+                    item_name = "去背"
+                    item_config = ProjectData.ADD_ONS["後製相關"][item_name]
+                    icon = item_config.get("icon", "")
+                    
+                    st.markdown(f"##### {icon} {item_name}")
+                    include_background_removal = st.checkbox(
+                        "去背服務",
+                        key="addon_background_removal",
+                        help="產品或人物去背服務"
+                    )
+                    
+                    if include_background_removal:
+                        # 去背類型選擇
+                        bg_removal_type = st.radio(
+                            "去背類型",
+                            options=["商品去背", "人像去背"],
+                            key="bg_removal_type"
+                        )
+                        
+                        # 根據不同去背類型設定不同預設價格
+                        default_price = 300 if bg_removal_type == "商品去背" else 2500
+                        price_max = 1000 if bg_removal_type == "商品去背" else 5000
+                        price_step = 100 if bg_removal_type == "商品去背" else 500
+                        
+                        col_bg1, col_bg2, col_bg3 = st.columns([2, 1, 1])
+                        with col_bg1:
+                            bg_quantity = st.number_input(
+                                "張數",
+                                min_value=1,
+                                value=3,
+                                key="addon_bg_removal_quantity"
+                            )
+                        
+                        with col_bg2:
+                            bg_price = st.number_input(
+                                "單價",
+                                min_value=100,
+                                max_value=price_max,
+                                value=default_price,
+                                step=price_step,
+                                key="addon_bg_removal_price"
+                            )
+                        
+                        with col_bg3:
+                            st.write("&nbsp;")
+                            st.write("&nbsp;")
+                            price_str = f"${bg_price}/張"
+                            st.write(price_str)
+                        
+                        # 簡化去背規格描述
+                        if bg_removal_type == "商品去背":
+                            bg_spec = "商品去背服務"
+                        else:
+                            bg_spec = "人像去背服務"
+                        
+                        add_on_items.append({
+                            'name': item_name,
+                            'spec': bg_spec,
+                            'quantity': bg_quantity,
+                            'unit': "張",
+                            'price': bg_price,
+                            'amount': bg_price * bg_quantity
+                        })
             
-            # 現場出圖選項 - 僅適用於活動拍攝
-            if is_event_photography:
-                item_name = "現場出圖"
+            with col2:
+                # 優化調光調色選項
+                item_name = "調光調色"
                 item_config = ProjectData.ADD_ONS["後製相關"][item_name]
                 icon = item_config.get("icon", "")
                 
                 st.markdown(f"##### {icon} {item_name}")
-                include_onsite_output = st.checkbox(
-                    "現場出圖服務",
-                    key="addon_onsite_output",
-                    help="活動現場即時出圖服務"
+                
+                # 先勾選是否需要調光調色
+                need_color_grading = st.checkbox(
+                    "需要調光調色",
+                    key="need_color_grading_checkbox",
+                    help="全照片調光調色，提供6MB JPG檔"
                 )
                 
-                if include_onsite_output:
-                    onsite_output_spec = st.text_input(
-                        "現場出圖服務說明",
-                        key="onsite_output_spec",
-                        help="說明現場出圖服務的細節"
-                    )
-                    onsite_output_price = st.number_input(
-                        "現場出圖費用", 
-                        min_value=0, 
-                        step=1000, 
-                        value=0, 
-                        key="onsite_output_price", 
-                        format="%d"
-                    )
-                    onsite_output_qty = st.number_input(
-                        "出圖張數", 
-                        min_value=0, 
-                        step=10, 
-                        value=0, 
-                        key="onsite_output_qty"
+                if need_color_grading:
+                    # 選擇時數方案
+                    color_grading_option = st.radio(
+                        "調光調色方案",
+                        options=["標準方案 $3,500 (4小時內)", "進階方案 $7,000 (8小時內)"],
+                        key="color_grading_option"
                     )
                     
-                    if onsite_output_spec and onsite_output_price > 0:
+                    # 根據選擇設定價格
+                    color_grading_price = 3500 if "標準方案" in color_grading_option else 7000
+                    color_grading_spec = "全照片調光調色，提供6MB JPG檔 (4小時內)" if "標準方案" in color_grading_option else "全照片調光調色，提供6MB JPG檔 (8小時內)"
+                    
+                    add_on_items.append({
+                        'name': item_name,
+                        'spec': color_grading_spec,
+                        'quantity': 1,
+                        'unit': "式",
+                        'price': color_grading_price,
+                        'amount': color_grading_price
+                    })
+                
+                # 現場出圖選項 - 僅適用於活動拍攝
+                if is_event_photography:
+                    item_name = "現場出圖"
+                    item_config = ProjectData.ADD_ONS["後製相關"][item_name]
+                    icon = item_config.get("icon", "")
+                    
+                    st.markdown(f"##### {icon} {item_name}")
+                    include_onsite_output = st.checkbox(
+                        "現場出圖服務",
+                        key="addon_onsite_output",
+                        help="活動現場即時出圖服務"
+                    )
+                    
+                    if include_onsite_output:
+                        onsite_output_spec = st.text_input(
+                            "現場出圖服務說明",
+                            key="onsite_output_spec",
+                            help="說明現場出圖服務的細節"
+                        )
+                        onsite_output_price = st.number_input(
+                            "現場出圖費用", 
+                            min_value=0, 
+                            step=1000, 
+                            value=0, 
+                            key="onsite_output_price", 
+                            format="%d"
+                        )
+                        onsite_output_qty = st.number_input(
+                            "出圖張數", 
+                            min_value=0, 
+                            step=10, 
+                            value=0, 
+                            key="onsite_output_qty"
+                        )
+                        
+                        if onsite_output_spec and onsite_output_price > 0:
+                            add_on_items.append({
+                                'name': item_name,
+                                'spec': f"{onsite_output_spec} ({onsite_output_qty}張)",
+                                'quantity': 1,
+                                'unit': "式",
+                                'price': onsite_output_price,
+                                'amount': onsite_output_price
+                            })
+                
+                # 新增急件處理選項
+                item_name = "急件處理"
+                item_config = ProjectData.ADD_ONS["後製相關"][item_name]
+                icon = item_config.get("icon", "")
+                
+                st.markdown(f"##### {icon} {item_name}")
+                include_rush_fee = st.checkbox(
+                    "急件處理費",
+                    key="addon_rush_fee",
+                    help="加急處理，縮短交付時間"
+                )
+                
+                if include_rush_fee:
+                    rush_fee_spec = st.text_input(
+                        "急件處理說明",
+                        key="rush_fee_spec",
+                        help="說明急件處理的細節，如縮短至多少時間內交付"
+                    )
+                    rush_fee_price = st.number_input(
+                        "急件處理費用", 
+                        min_value=0, 
+                        step=500, 
+                        value=0, 
+                        key="rush_fee_price", 
+                        format="%d"
+                    )
+                    
+                    if rush_fee_spec and rush_fee_price > 0:
                         add_on_items.append({
                             'name': item_name,
-                            'spec': f"{onsite_output_spec} ({onsite_output_qty}張)",
+                            'spec': rush_fee_spec,
                             'quantity': 1,
                             'unit': "式",
-                            'price': onsite_output_price,
-                            'amount': onsite_output_price
+                            'price': rush_fee_price,
+                            'amount': rush_fee_price
                         })
         
         # Tab 4: 場地與交通
@@ -1302,27 +1502,32 @@ def create_add_on_sections(project_type, project_name):
                     })
             
             with col2:
-                # 車馬費選項
+                # 車馬費選項 - 修改為需先勾選
                 item_name = "車馬費"
                 item_config = ProjectData.ADD_ONS["交通相關"][item_name]
                 icon = item_config.get("icon", "")
                 
                 st.markdown(f"##### {icon} {item_name}")
-                
-                options = item_config["options"]
-                option_labels = [option["label"] for option in options]
-                
-                selected_index = st.selectbox(
-                    f"選擇{item_name}金額",
-                    range(len(option_labels)),
-                    format_func=lambda i: option_labels[i],
-                    key=f"addon_{item_name}"
+                include_transportation = st.checkbox(
+                    "加收車馬費",
+                    key="addon_transportation",
+                    help="加收交通車馬費"
                 )
                 
-                selected_option = options[selected_index]
-                selected_value = selected_option["value"]
-                
-                if selected_value > 0:
+                if include_transportation:
+                    options = item_config["options"]
+                    option_labels = [option["label"] for option in options]
+                    
+                    selected_index = st.selectbox(
+                        "車馬費金額",
+                        range(len(option_labels)),
+                        format_func=lambda i: option_labels[i],
+                        key=f"addon_{item_name}"
+                    )
+                    
+                    selected_option = options[selected_index]
+                    selected_value = selected_option["value"]
+                    
                     add_on_items.append({
                         'name': item_name,
                         'spec': item_config["spec"],
@@ -1430,6 +1635,14 @@ def create_video_options_section(current_project):
                 )
     return video_options
 
+def get_company_options():
+    """取得公司選項資訊"""
+    companies = ProjectData.COMPANIES
+    company_options = list(companies.keys())
+    default_index = next((i for i, name in enumerate(company_options) 
+                         if companies[name].get("default", False)), 0)
+    return company_options, default_index
+
 # 主程式
 def main():
     # 設置頁面
@@ -1452,19 +1665,6 @@ def main():
         }
         .stTabs [data-baseweb="tab-list"] {
             gap: 8px;
-        }
-        .stTabs [data-baseweb="tab"] {
-            height: 50px;
-            white-space: pre-wrap;
-            background-color: #2c3e50;
-            color: white;
-            border-radius: 4px 4px 0 0;
-            border-bottom: none;
-        }
-        .stTabs [aria-selected="true"] {
-            background-color: #1a2c3d !important;
-            border-top: 2px solid #3498db;
-            color: white !important;
         }
         .download-button {
             display: inline-block;
@@ -1492,6 +1692,15 @@ def main():
     """, unsafe_allow_html=True)
     
     st.title('📸 專業攝影報價單生成系統')
+    
+    # 公司選擇 - 簡化設計
+    company_options, default_company_index = get_company_options()
+    selected_company = st.sidebar.selectbox(
+        "選擇工作室",
+        options=company_options,
+        index=default_company_index
+    )
+    company_info = ProjectData.COMPANIES.get(selected_company)
     
     # 基本資訊
     col1, col2 = st.columns(2)
@@ -1534,21 +1743,21 @@ def main():
                 '📷 拍攝張數', 
                 min_value=min_hours, 
                 value=min_hours,
-                help=f"最少拍攝張數：{min_hours}張"
+                help=f"最少拍攝張數: {min_hours}張"
             )
             hourly_rate = current_project.get("hourly_rate", 0)
             base_amount = hourly_rate * shoot_hours
-            st.info(f"🔢 基本費用：{shoot_hours}張 x ${hourly_rate:,}/張 = **${base_amount:,}**")
+            st.info(f"🔢 基本費用: {shoot_hours}張 x ${hourly_rate:,}/張 = **${base_amount:,}**")
         else:
             shoot_hours = st.number_input(
                 '⏱️ 拍攝時數 (小時)', 
                 min_value=min_hours, 
                 value=max(CONFIG["DEFAULT_HOURS"], min_hours),
-                help=f"最少預約時數：{min_hours}小時"
+                help=f"最少預約時數: {min_hours}小時"
             )
             hourly_rate = current_project.get("hourly_rate", 0)
             base_amount = hourly_rate * shoot_hours
-            st.info(f"🔢 基本費用：{shoot_hours}小時 x ${hourly_rate:,}/小時 = **${base_amount:,}**")
+            st.info(f"🔢 基本費用: {shoot_hours}小時 x ${hourly_rate:,}/小時 = **${base_amount:,}**")
     
     # 顯示專案說明
     display_project_info(project_type)
@@ -1585,6 +1794,7 @@ def main():
                         shoot_date, 
                         shoot_hours, 
                         add_on_items,
+                        company_info,
                         video_options
                     )
                     
@@ -1599,7 +1809,7 @@ def main():
                     
                     # 也提供一個使用PDF檔案的選項
                     st.info("""
-                    **如何使用HTML報價單：**
+                    **如何使用HTML報價單:**
                     1. 點擊上方連結下載HTML檔案
                     2. 用瀏覽器打開該檔案
                     3. 點擊頁面底部的「列印報價單」按鈕，或使用瀏覽器的列印功能（Ctrl+P或⌘+P）
@@ -1618,11 +1828,12 @@ def main():
             
             with preview_cols[0]:
                 st.markdown(f"""
-                **基本資訊：**
-                * 客戶名稱：{client_name}
-                * 專案類型：{project_type}
-                * 拍攝日期：{shoot_date.strftime('%Y-%m-%d') if shoot_date else '待定'}
-                * 拍攝{("張數" if is_per_photo else "時數")}：{shoot_hours} {("張" if is_per_photo else "小時")}
+                **基本資訊:**
+                * 客戶名稱: {client_name}
+                * 製作方: {company_info.get('name', selected_company)}
+                * 專案類型: {project_type}
+                * 拍攝日期: {shoot_date.strftime('%Y-%m-%d') if shoot_date else '待定'}
+                * 拍攝{("張數" if is_per_photo else "時數")}: {shoot_hours} {("張" if is_per_photo else "小時")}
                 """)
             
             with preview_cols[1]:
@@ -1631,24 +1842,25 @@ def main():
                 discount_info = f"（含{int((1-discount_rate)*100)}%折扣）" if discount_rate < 1.0 else ""
                 
                 st.markdown(f"""
-                **預計費用：**
-                * 基本攝影費：${current_project['hourly_rate'] * shoot_hours:,} ({shoot_hours}{unit} x ${current_project['hourly_rate']:,}/{unit})
-                * 加購項目數：{len(add_on_items)} 項
-                * 總計金額：**${total_amount:,}** {discount_info}(含稅)
+                **預計費用:**
+                * 基本攝影費: ${current_project['hourly_rate'] * shoot_hours:,} ({shoot_hours}{unit} x ${current_project['hourly_rate']:,}/{unit})
+                * 加購項目數: {len(add_on_items)} 項
+                * 總計金額: **${total_amount:,}** {discount_info}(含稅)
                 """)
             
             # 顯示報價單簡要說明
             st.info(f"""
             本報價單在產生後將包含所有詳細費用明細、交付規格說明、付款條件等資訊。
-            報價單有效期：{(datetime.datetime.now() + datetime.timedelta(days=28)).strftime('%Y-%m-%d')}
+            報價單有效期: {(datetime.datetime.now() + datetime.timedelta(days=28)).strftime('%Y-%m-%d')}
+            發送公司: {company_info.get('name', selected_company)}
             """)
             
             # 如果有影片選項，顯示額外資訊
             if video_options:
                 st.success(f"""
-                **影片規格：**
-                * 影片長度：{video_options.get('video_length', '未指定')}
-                * 顯示方向：{video_options.get('orientation', '未指定')}
+                **影片規格:**
+                * 影片長度: {video_options.get('video_length', '未指定')}
+                * 顯示方向: {video_options.get('orientation', '未指定')}
                 """)
 
 if __name__ == "__main__":
